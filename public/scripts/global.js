@@ -1,7 +1,10 @@
 // Fetch Helpers
 const handleFetch = async (url, options) => {
   try {
+    
     const response = await fetch(url, options);
+    
+   
     const { status, statusText, ok } = response;
     if (!ok) return [null, { status, statusText }];
 
@@ -13,6 +16,7 @@ const handleFetch = async (url, options) => {
 };
 
 const getFetchOptions = (body, method = 'POST') => ({
+
   method,
   credentials: 'include', // IMPORTANT, this tells fetch to include cookies
   headers: { 'Content-Type': 'application/json' },
@@ -21,13 +25,19 @@ const getFetchOptions = (body, method = 'POST') => ({
 
 // CREATE USER
 const signupAndLoginHandler = async (url, form) => {
+  
   const formData = new FormData(form);
-  const options = getFetchOptions(Object.fromEntries(formData.entries()));
+  
+  const formValues = Object.fromEntries(formData.entries());
+  
+  const options = getFetchOptions(formValues);
+  
+  
   const [_response, err] = await handleFetch(url, options);
   if (err) {
-    form.reset();
     return alert('Something went wrong');
   }
+  
   window.location.assign('/user.html');
 };
 
@@ -57,22 +67,36 @@ const logOutHandler = async () => {
   window.location.assign('/');
 };
 
-// Nav Helper
-const setNav = (hasLoggedInUser) => {
-  const loggedOutNavHtml = `<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="./create.html">Sign Up</a></li>
-    <li><a href="./login.html">Login</a></li>
-  </ul>`;
-
-  const loggedInNavHtml = `<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="./user.html">Profile</a></li>
-  </ul>`;
-
-  const navHtml = hasLoggedInUser ? loggedInNavHtml : loggedOutNavHtml;
-  document.querySelector('nav').innerHTML = navHtml;
+//BUDGET CRUD
+const createBudgetHandler = async (form) => {
+  
+  const formData = new FormData(form);
+  const budget = Object.fromEntries(formData.entries());
+  console.log(budget)
+  const url = '/api/budget';
+  const options = getFetchOptions(budget);
+  
+  const [response, err] = await handleFetch(url, options);
+  if (err) return alert('Something went wrong');
+  return response;
 };
+
+// Nav Helper
+// const setNav = (hasLoggedInUser) => {
+//   const loggedOutNavHtml = `<ul>
+//     <li><a href="/">Home</a></li>
+//     <li><a href="./create.html">Sign Up</a></li>
+//     <li><a href="./login.html">Login</a></li>
+//   </ul>`;
+
+//   const loggedInNavHtml = `<ul>
+//     <li><a href="/">Home</a></li>
+//     <li><a href="./user.html">Profile</a></li>
+//   </ul>`;
+
+//   const navHtml = hasLoggedInUser ? loggedInNavHtml : loggedOutNavHtml;
+//   document.querySelector('nav').innerHTML = navHtml;
+// };
 
 // This is wonky. Once you learn about bundlers we won't have to
 // explicitly create globals. We just lack the tools right now.
@@ -81,9 +105,10 @@ Object.assign(window, {
   getFetchOptions,
   fetchLoggedInUser,
   signupAndLoginHandler,
-  setNav,
+  // setNav,
   logOutHandler,
   updateUsernameHandler,
+  createBudgetHandler
 });
 
 export {
@@ -91,7 +116,8 @@ export {
   getFetchOptions,
   fetchLoggedInUser,
   signupAndLoginHandler,
-  setNav,
+  // setNav,
   logOutHandler,
   updateUsernameHandler,
+  createBudgetHandler
 };

@@ -25,6 +25,29 @@
     <form id="logout-form" aria-label="logout">
       <button type="submit">Log Out</button>
     </form>
+    <form id="budget-form">
+      <div>
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+      </div>
+      <div>
+          <label for="description">Description:</label>
+          <input type="text" id="description" name="description" placeholder="Enter description" required>
+      </div>
+      <div>
+          <label for="amount">Amount:</label>
+          <input type="number" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
+      </div>
+      <div>
+          <label for="type">Type:</label>
+          <select id="type" name="type" required>
+              <option value="" selected disabled>Select type</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+          </select>
+      </div>
+      <button type="submit">Submit</button>
+  </form>
   </main>
 </body>
 </html>

@@ -3,7 +3,8 @@ import {
   fetchLoggedInUser,
   logOutHandler,
   updateUsernameHandler,
-  setNav,
+  createBudgetHandler
+  // setNav,
 } from './global.js';
 
 const isAuthError = (err) => (err.status === 401 || err.status === 403);
@@ -13,16 +14,18 @@ const renderUsername = (username) => {
 };
 
 const main = async () => {
-  const user = await fetchLoggedInUser();
+   const user = await fetchLoggedInUser();
   if (!user) return redirectToLogin();
 
   const logoutForm = document.querySelector('#logout-form');
+  const budgetForm = document.querySelector('#budget-form');
   const updateUsernameForm = document.querySelector('#username-form');
 
   logoutForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     logOutHandler();
   });
+
 
   updateUsernameForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -34,10 +37,21 @@ const main = async () => {
     event.target.reset();
   });
 
+  
+
   updateUsernameForm.dataset.userId = user.id;
 
-  setNav(!!user);
+  // setNav(!!user);
   renderUsername(user.username);
+  budgetForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const [response, err] = await createBudgetHandler(event.target);
+
+    if (err) return isAuthError(err) ? redirectToLogin() : alert('Something went wrong');
+    renderBudget(response);
+
+    event.target.reset();
+  });
 };
 
 main();

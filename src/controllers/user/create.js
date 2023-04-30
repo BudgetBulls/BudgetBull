@@ -1,13 +1,14 @@
 const createUser = async (req, res) => {
+  console.log(req,"req")
   const {
     session,
     db: { User },
     body: { username, password },
   } = req;
-
+  
   const user = await User.create(username, password);
   session.userId = user.id;
-
+  
   res.send(user);
 };
 
