@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/style.css">
-  <script type="module" src="./scripts/user.js"></script>
-  <title>User</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/user.css">
+    <script type="module" src="./scripts/user.js"></script>
+    <title>User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-  <nav id="main-nav"></nav>
-  <main>
-    <h1 id="username"></h1>
+    <nav id="main-nav" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+    <main class="container">
+        <h1 id="username" class="mt-4 mb-4"></h1>
 
-    <p id="rename">Update Username</p>
-    <form id="username-form" aria-labelledby="rename">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username-input">
-      <button type="submit">Update Username</button>
-    </form>
+        <p id="rename">Update Username</p>
+        <form id="username-form" aria-labelledby="rename">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username-input" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Username</button>
+        </form>
 
-    <hr>
+        <hr>
 
-    <form id="logout-form" aria-label="logout">
-      <button type="submit">Log Out</button>
-    </form>
-    <form id="budget-form">
-      <div>
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required>
-      </div>
-      <div>
-          <label for="description">Description:</label>
-          <input type="text" id="description" name="description" placeholder="Enter description" required>
-      </div>
-      <div>
-          <label for="amount">Amount:</label>
-          <input type="number" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
-      </div>
-      <div>
-          <label for="type">Type:</label>
-          <select id="type" name="type" required>
-              <option value="" selected disabled>Select type</option>
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
-          </select>
-      </div>
-      <button type="submit">Submit</button>
-  </form>
-  </main>
+        <form id="logout-form" aria-label="logout" class="mb-4">
+            <button type="submit" class="btn btn-danger">Log Out</button>
+        </form>
+        <form id="budget-form">
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" class="form-control" placeholder="Enter description" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" class="form-control" step="0.01" placeholder="Enter amount" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select id="type" name="type" class="form-control" required>
+                    <option value="" selected disabled>Select type</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </main>
 </body>
+
 </html>
