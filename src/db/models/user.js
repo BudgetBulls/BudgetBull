@@ -8,7 +8,7 @@ class User {
   // to provide the controller with instances that
   // have access to the instance methods isValidPassword
   // and update.
-  constructor({ id, username, password_hash }) {
+  constructor({ id, username, password_hash, }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
@@ -48,29 +48,43 @@ class User {
     }
   }
 
+  // static async create(username, password) {
+  //   try {
+  //     const passwordHash = await authUtils.hashPassword(password);
+
+  //     const query = `INSERT INTO users (username, password_hash)
+  //       VALUES (?, ?) RETURNING *`;
+  //     const { rows: [user] } = await knex.raw(query, [username, passwordHash]);
+  //     return new User(user);
+  //   } catch (err) {
+  //     console.error(err);
+  //     return null;
+  //   }
+  // }
   static async create(username, password) {
     try {
-      const passwordHash = await authUtils.hashPassword(password);
-
-      const query = `INSERT INTO users (username, password_hash)
-        VALUES (?, ?) RETURNING *`;
-      const { rows: [user] } = await knex.raw(query, [username, passwordHash]);
-      return new User(user);
+      const user = await User.findByUsername(username);
+      if (user) {
+        // User already exists, return 409
+        return { status: 409, message: 'Username already taken' };
+      } else {
+        // User doesn't exist, create new user
+        const passwordHash = await authUtils.hashPassword(password);
+        const query = `INSERT INTO users (username, password_hash)
+          VALUES (?, ?) RETURNING *`;
+        const { rows: [newUser] } = await knex.raw(query, [username, passwordHash]);
+        return new User(newUser);
+      }
     } catch (err) {
       console.error(err);
       return null;
     }
   }
+  
+  
+  
 
-  static async deleteAll() {
-    try {
-      return knex.raw('TRUNCATE users;');
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  }
-
+  
   update = async (username) => { // dynamic queries are easier if you add more properties
     try {
       const [updatedUser] = await knex('users')

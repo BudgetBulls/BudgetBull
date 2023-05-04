@@ -1,0 +1,225 @@
+// Page details / image taken from http://www.punditarena.com/mma/ccunningham/khabib-nurmagomedov-gives-credit/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Sanchez');
+
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$dark-gray: #8a8a8a;
+$black: #0a0a0a;
+$white: #fefefe;
+$primary-color: #f53363;
+$secondary-color: #767676;
+$success-color: #3adb76;
+$warning-color: #ffae00;
+$alert-color: #cc4b37;
+
+// global
+body {
+  font-family: 'Open Sans', sans-serif
+}
+a {
+  color: $primary-color;
+  
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: 'Sanchez', sans-serif;
+  font-weight: bold;
+}
+svg {
+  vertical-align: middle;
+  margin-bottom: 3px;
+}
+
+// top-bar
+.top-bar {
+  background: linear-gradient(to top, rgba($black,0) 10%,rgba($black,1) 90%);
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  color: $white;
+  z-index: 2;
+  
+  @media screen and (max-width: 42em) {
+    .top-bar-left, .top-bar-right {
+      flex: initial;
+    }
+  }
+
+  ul {
+    background-color: transparent;
+    
+    &.menu-items {
+      li {
+        &.mobile-menu {
+          display: none;
+
+          @media screen and (max-width: 42em) {
+            display: initial;
+          }
+        }
+
+        @media screen and (max-width: 42em) {
+          display: none;
+        }
+      } 
+    }
+
+    a {
+      color: $white;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .menu {
+    &.logo {
+      font-family: 'Sanchez', sans-serif;
+      font-size: 1.25rem;
+    }
+
+    &-items {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+// hero
+.hero {
+  position: relative;
+  background-position: center -50px;
+  background-size: cover;
+  min-height: 600px;
+  border-bottom: 6px solid $black;
+
+  @media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    min-height: 500px;
+  }
+  @media screen and (max-width: 39.9375em) {
+    height: 240px;
+  }
+
+  &--bottom-gradient {
+    background: linear-gradient(to bottom, rgba($black,0) 10%,rgba($black,1) 90%);
+    height: 70px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+// article
+.article {
+  margin-bottom: 6rem;
+
+  &--container {
+    position: relative;
+  }
+
+  &--header {
+    padding-bottom: 1rem;
+    float: left;
+    max-width: 500px;
+  }
+
+  &--meta {
+    position: absolute;
+    width: 100%;
+    top: -10rem;
+    color: $white;
+    text-shadow: $black 1px 0 10px;
+
+    a {
+      color: $white;
+      border-bottom: 1px solid $white;
+      padding-bottom: 2px;
+
+      &:hover {
+        text-decoration: none;
+        color: $primary-color;
+        border-color: $primary-color;
+      }
+    }
+
+    .author {
+      margin: 0;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+
+      span {
+        margin: 0 0.5rem;
+      }
+    }
+
+    .breadcrumbs {
+      margin: 0;
+    }
+  }
+
+  &--body {
+    border-top: 6px solid $black;
+    top: -8rem;
+    position: absolute;
+    background-color: $white;
+    padding: 2rem 3rem;
+
+    @media screen and (max-width: 39.9375em) {
+      padding: 1rem;
+    }
+
+    p {
+      margin-bottom: 3rem;
+      text-indent: 30px;
+      line-height: 1.9;
+      text-align: justify;
+    }
+
+    .latest-headlines {
+      margin-right: 4rem;
+      padding-bottom: 1rem;
+      float: left;
+
+      h5 {
+        margin-top: 2rem;
+        margin-bottom: -7px;
+      }
+
+      ul {
+        border-top: 3px solid $black;
+        margin: 0 0.5rem 2rem 0;
+        font-size: 90%;
+
+        li {
+          a {
+            display: block;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid lighten($light-gray, 5%);
+
+            small {
+              color: $dark-gray;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  blockquote {
+    font-family: 'Sanchez', sans-serif;
+    font-size: 1.25rem;
+    margin: 3rem 1rem;
+    border-left: 0;
+
+    cite {
+      text-align: right;
+    }
+  }
+}
