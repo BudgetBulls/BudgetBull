@@ -1,10 +1,10 @@
 // Fetch Helpers
 const handleFetch = async (url, options) => {
   try {
-    
+
     const response = await fetch(url, options);
-    
-   
+
+
     const { status, statusText, ok } = response;
     if (!ok) return [null, { status, statusText }];
 
@@ -25,19 +25,19 @@ const getFetchOptions = (body, method = 'POST') => ({
 
 // CREATE USER
 const signupAndLoginHandler = async (url, form) => {
-  
+
   const formData = new FormData(form);
-  
+
   const formValues = Object.fromEntries(formData.entries());
-  
+
   const options = getFetchOptions(formValues);
-  
-  
+
+
   const [_response, err] = await handleFetch(url, options);
   if (err) {
     return alert('Something went wrong');
   }
-  
+
   window.location.assign('/user.html');
 };
 
@@ -68,48 +68,40 @@ const logOutHandler = async () => {
 };
 
 //BUDGET CRUD
+//BUDGET CREATE
 const createBudgetHandler = async (form) => {
-  
+
   const formData = new FormData(form);
   const budget = Object.fromEntries(formData.entries());
-  console.log(budget)
-  const url = '/api/budget';
+
+  const url = '/api/me/budget';
   const options = getFetchOptions(budget);
-  
+
   const [response, err] = await handleFetch(url, options);
   if (err) return alert('Something went wrong');
   return response;
 };
+//BUDGET READ
+//reads last budget that the user created for display on the user page
+const getBudget = async () => {
+  const [response, err] = await handleFetch('/api/me/budget', { credentials: 'include' });
+  if(err) return alert('Something went wrong');
+  return response;
+};
 
-// Nav Helper
-// const setNav = (hasLoggedInUser) => {
-//   const loggedOutNavHtml = `<ul>
-//     <li><a href="/">Home</a></li>
-//     <li><a href="./create.html">Sign Up</a></li>
-//     <li><a href="./login.html">Login</a></li>
-//   </ul>`;
+//BUDGET DELETE
+//deletes a budget item from the budget table
+const deleteBudgetItem = async (id) => {
+  const url = `/api/me/budget/${id}`;
+  const options = getFetchOptions({}, 'DELETE');
+  const [response, err] = await handleFetch(url, options);
+  if (err) return alert('Something went wrong');
+  location.reload();
+  return response;
+};
 
-//   const loggedInNavHtml = `<ul>
-//     <li><a href="/">Home</a></li>
-//     <li><a href="./user.html">Profile</a></li>
-//   </ul>`;
 
-//   const navHtml = hasLoggedInUser ? loggedInNavHtml : loggedOutNavHtml;
-//   document.querySelector('nav').innerHTML = navHtml;
-// };
 
-// This is wonky. Once you learn about bundlers we won't have to
-// explicitly create globals. We just lack the tools right now.
-Object.assign(window, {
-  handleFetch,
-  getFetchOptions,
-  fetchLoggedInUser,
-  signupAndLoginHandler,
-  // setNav,
-  logOutHandler,
-  updateUsernameHandler,
-  createBudgetHandler
-});
 
 export {
   handleFetch,
@@ -119,5 +111,7 @@ export {
   // setNav,
   logOutHandler,
   updateUsernameHandler,
-  createBudgetHandler
+  createBudgetHandler,
+  deleteBudgetItem,
+  getBudget
 };

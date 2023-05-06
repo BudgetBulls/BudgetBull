@@ -1,0 +1,12 @@
+.budget-container {
+    border: 1px solid #000;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.budget-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+

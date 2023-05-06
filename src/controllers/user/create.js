@@ -1,5 +1,4 @@
 const createUser = async (req, res) => {
-  console.log(req.body, "request body"); // added logging
   const {
     session,
     db: { User },
