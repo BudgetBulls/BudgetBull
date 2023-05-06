@@ -25,12 +25,12 @@ Router.get('/cookieCounter', (req, res) => {
 // Create
 Router.post('/users', userController.create);
 Router.post('/users/login', userController.login);
-Router.post('/budget/', createBudgetItem);
+Router.post('/me/budget', createBudgetItem);
 
 // Read
 Router.get('/users', userController.list);
 Router.get('/users/:id', userController.show);
-Router.get('/me/budget', checkAuthentication, getAllBudgetItems);
+Router.get('/me/budget', getAllBudgetItems);
 Router.get('/me', userController.showMe);
 // checkAuthentication middleware is applied to only to this route (and /logged-in-secret)
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
@@ -43,6 +43,6 @@ Router.patch('/budget/:id',checkAuthentication, updateBudgetItem);
 
 // Delete
 Router.delete('/users/logout', userController.logout);
-Router.delete("/budget/:id", checkAuthentication, deleteBudgetItem);
+Router.delete('/me/budget/:id', checkAuthentication, deleteBudgetItem);
 
 module.exports = Router;

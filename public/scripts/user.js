@@ -4,6 +4,7 @@ import {
   logOutHandler,
   updateUsernameHandler,
   createBudgetHandler,
+  deleteBudgetItem,
   getBudget,
 } from './global.js';
 
@@ -16,31 +17,38 @@ const renderUsername = (username) => {
 const renderBudget = (budget) => {
   
   const budgetTable = document.querySelector('#budget-table');
-  console.log(budgetTable,"budgetTable")
-  budgetTable.innerHTML = '';
+  
   budget.forEach((budgetItem) => {
     const row = document.createElement('tr');
     const name = document.createElement('td');
     const amount = document.createElement('td');
-    const category = document.createElement('td');
+    const type = document.createElement('td');
     const date = document.createElement('td');
     const edit = document.createElement('td');
     const deleteButton = document.createElement('button');
-
-    name.textContent = budgetItem.name;
+    const budgetTableBody = document.querySelector('#budget-table-body')
+   
+    budgetTableBody.innerHTML = '';
+    name.textContent = budgetItem.description;
     amount.textContent = budgetItem.amount;
-    category.textContent = budgetItem.category;
-    date.textContent = budgetItem.date;
-    // deleteButton.textContent = 'Delete';
-    // deleteButton.addEventListener('click', async () => {
-    //   const [response, err] = await deleteBudgetItem(budgetItem.id);
-    //   if (err) return alert('Something went wrong');
-    //   renderBudget(response);
-    // });
+    type.textContent = budgetItem.type;
+    date.textContent = new Date(budgetItem.date).toLocaleDateString('en-US');
+    deleteButton.textContent = 'Delete';
+    
+    
+    //delete button event listener 
+    //removes the corresponding row from the table
+    deleteButton.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const [response, err] = await deleteBudgetItem(budgetItem.id);
+      if (err) return isAuthError(err) ? redirectToLogin() : alert('Something went wrong');
+      row.remove();
+      
+    });
 
-    // edit.append(deleteButton);
-    row.append(name, amount, category, date, edit);
-     budgetTable.append(row);
+    edit.append(deleteButton);
+    row.append(date,name, amount, type, edit);
+    budgetTable.append(row);
   });
 };
 
@@ -50,8 +58,6 @@ const renderBudget = (budget) => {
 //10 rows displayed at a time with a next and previous button
 //next and previous button will need to be created and appended to the DOM
 //next and previous button will need to be event listeners that will change the table
-
-
 
 
 const main = async () => {
@@ -87,11 +93,13 @@ const main = async () => {
   renderUsername(user.username);
   budgetForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    
     const [response, err] = await createBudgetHandler(event.target);
 
     if (err) return isAuthError(err) ? redirectToLogin() : alert('Something went wrong');
+    
     renderBudget(response);
-
+    location.reload();
     event.target.reset();
   });
   renderBudget(budget);

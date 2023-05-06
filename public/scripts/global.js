@@ -89,21 +89,19 @@ const getBudget = async () => {
   return response;
 };
 
+//BUDGET DELETE
+//deletes a budget item from the budget table
+const deleteBudgetItem = async (id) => {
+  const url = `/api/me/budget/${id}`;
+  const options = getFetchOptions({}, 'DELETE');
+  const [response, err] = await handleFetch(url, options);
+  if (err) return alert('Something went wrong');
+  location.reload();
+  return response;
+};
 
 
-// This is wonky. Once you learn about bundlers we won't have to
-// explicitly create globals. We just lack the tools right now.
-Object.assign(window, {
-  handleFetch,
-  getFetchOptions,
-  fetchLoggedInUser,
-  signupAndLoginHandler,
-  // setNav,
-  logOutHandler,
-  updateUsernameHandler,
-  createBudgetHandler,
-  getBudget
-});
+
 
 export {
   handleFetch,
@@ -114,5 +112,6 @@ export {
   logOutHandler,
   updateUsernameHandler,
   createBudgetHandler,
+  deleteBudgetItem,
   getBudget
 };
