@@ -79,6 +79,7 @@ const createBudgetHandler = async (form) => {
 
   const [response, err] = await handleFetch(url, options);
   if (err) return alert('Something went wrong');
+  location.reload();
   return response;
 };
 //BUDGET READ
