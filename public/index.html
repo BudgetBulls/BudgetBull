@@ -1,17 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/style.css">
-  <script type="module" src="./scripts/index.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/response.css">
+
+    <title>FABRIZIO</title>
 </head>
 
-<body>
-  <nav id="main-nav"></nav> 
-  <main>
-    <p class="text-center mt-3">Don't have an account? <a href="sign.html">Sign Up</a></p>
-  </main>
+<body id="top">
+    <!-- header area start -->
+    <div class="header">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">BudgetBulls</a>
+            </div>
+            <ul class="menu-items">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bot.html">RoboAdvisor</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#">Support</a></li>
+                <li class="explore-btn"><a href="create.html">Explore</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nav-toggler">
+        <div class="toggle-bar"></div>
+    </div>
+    
+    <!-- home area start -->
+    <div class="container" id="home">
+        <div class="text-side" data-aos="fade-right">
+            <div class="title">
+                <h1>A Budget That Has Your Back</h1>
+            </div>
+            <div class="details">
+                <p>Budgeting is crucial for financial stability.By tracking expenses
+                    and creating a plan for income, you can avoid overspending,
+                    save for the future, and achieve your financial goals.</p>
+            </div>
+            <div class="buttons">
+                <a href="#">Get Started</a>
+                <a href="#">Explore</a>
+            </div>
+        </div>
+        <div class="image-side" data-aos="fade-left">
+            <img src="budgetOg.png" alt="home-img">
+        </div>
+    </div>
+    <!-- home area end -->
+
+
+
+    <!-- service area start -->
+    <div class="container" id="services">
+        <div class="image-side" data-aos="fade-right">
+            <img src="budget1.png"  alt="services">
+        </div>
+        <div class="text-side" data-aos="fade-right" data-aos-delay="600">
+            <div class="title">
+                <h1>Try our best services for your dream project</h1>
+            </div>
+            <div class="details">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis quibusdam harum maiores
+                    praesentium nisi, officia sint magnam consequuntur nemo eius libero ratione officiis.</p>
+            </div>
+            <div class="buttons">
+                <a href="#">Explore</a>
+            </div>
+        </div>
+    </div>
+    <!-- service area end -->
+
+
+
+    <!-- pricing area start -->
+    <div class="container" id="pricing">
+        <div class="text-side" data-aos="fade-down-left" data-aos-delay="600">
+            <div class="title">
+                <h1>Get best prices to create multiple pages</h1>
+            </div>
+            <div class="details">
+                <p>Please note that the upcoming assignment is a part of our curriculum's Unit 7 project.
+                    Let us know if you have any questions or concerns.</p>
+            </div>
+            <div class="buttons">
+                <a href="#">Explore</a>
+            </div>
+        </div>
+        <div class="image-side" data-aos="fade-down-left">
+            <img src="budget1.png" alt="home-img">
+        </div>
+    </div>
+    <!-- pricing area end -->
+
+
+
+    <!-- support area start -->
+    <div class="container" id="support">
+        <div class="image-side" data-aos="zoom-in">
+            <img src="budget1.png"  alt="services">
+        </div>
+        <div class="text-side" data-aos="zoom-in">
+            <div class="title">
+                <h1>Our team is always with you to solve your problem</h1>
+            </div>
+            <div class="details">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis quibusdam harum maiores
+                    praesentium nisi, officia sint magnam consequuntur nemo eius libero ratione officiis.</p>
+            </div>
+            <div class="buttons">
+                <a href="#">Explore</a>
+            </div>
+        </div>
+    </div>
+    <!-- support area end -->
+
+
+
+    <!-- contact area start -->
+    <div class="container" id="contact">
+        <div class="text-side" data-aos="fade-right">
+            <div class="title">
+                <h1>Feel free to contact us at any time</h1>
+            </div>
+            <div class="details">
+                <p>Please feel free to reach out to us through our designated contact channels or email address.</p>
+            </div>
+            <div class="buttons">
+                <a href="#">Who we are</a>
+            </div>
+        </div>
+        <div class="image-side" data-aos="fade-left">
+            <img src="budget1.png"  alt="home-img">
+        </div>
+    </div>
+    <!-- contact area end -->
+
+
+
+    <!-- scroll top button -->
+    <a href="#top" class="scroll-top-btn">
+        <span class="icon-angle-up"></span>
+    </a>
+
+    <!-- footer -->
+    <footer>
+        <p>Unit 7 FTW</p>
+    </footer>
+
+    <!-- aos cdn link -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- custom js -->
+    <script src="index.js"></script>
+
 </body>
+
 </html>
