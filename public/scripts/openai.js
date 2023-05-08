@@ -1,4 +1,4 @@
-const apiKey = "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";
+const apiKey = "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";
 
 let conversation = [];
 export const getBotResponse = async (userMessage) => {
