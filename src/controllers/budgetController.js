@@ -40,7 +40,7 @@ const updateBudgetItem = async (req, res) => {
 };
 
 const deleteBudgetItem = async (req, res) => {
-  const { id } = req.params;
+  const id = parseInt(req.params.id);
 
   try {
     const deletedCount = await Budget.delete(id);

@@ -38,7 +38,7 @@ const signupAndLoginHandler = async (url, form) => {
     return alert('Something went wrong');
   }
 
-  window.location.assign('/user.html');
+  window.location.assign('/budget.html');
 };
 
 // READ USER
@@ -64,7 +64,7 @@ const updateUsernameHandler = async (form) => {
 const logOutHandler = async () => {
   const [_response, err] = await handleFetch('/api/users/logout', { method: 'DELETE' });
   if (err) return alert('Something went wrong');
-  window.location.assign('/');
+  window.location.assign('/sign.html');
 };
 
 //BUDGET CRUD
@@ -92,7 +92,7 @@ const getBudget = async () => {
 //BUDGET DELETE
 //deletes a budget item from the budget table
 const deleteBudgetItem = async (id) => {
-  const url = `/api/me/budget/${id}`;
+  const url = `/api/me/budget/${String(id)}`;
   const options = getFetchOptions({}, 'DELETE');
   const [response, err] = await handleFetch(url, options);
   if (err) return alert('Something went wrong');

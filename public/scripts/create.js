@@ -1,21 +1,31 @@
-/* eslint-disable import/extensions */
-import {
-  fetchLoggedInUser,
-  signupAndLoginHandler,
-  // setNav,
+import { 
+  fetchLoggedInUser, 
+  signupAndLoginHandler, 
+  // setNav, 
 } from './global.js';
 
-const main = async () => {
-  const user = await fetchLoggedInUser();
-  if (user) return window.location.assign('/user.html');
+const createForm = document.querySelector('#create-form');
 
-  // setNav();
-  document.querySelector('#create-form').addEventListener('submit', async (event) => {
+const handleCreateFormSubmit = async (event) => {
   event.preventDefault();
 
-  
-  signupAndLoginHandler('/api/users', event.target);
-});
+  await signupAndLoginHandler('/api/users', event.target);
+
+  const user = await fetchLoggedInUser();
+  if (user) {
+    window.location.assign('/budget.html');
+  }
+};
+
+const main = async () => {
+  // setNav();
+  createForm.addEventListener('submit', handleCreateFormSubmit);
+
+  const user = await fetchLoggedInUser();
+  if (user) {
+    window.location.assign('/budget.html');
+  }
 };
 
 main();
+

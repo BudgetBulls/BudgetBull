@@ -1,39 +1,54 @@
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-      label: 'Sales',
-      data: [12, 19, 3, 5, 2, 3, 9],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 99, 132, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(255, 99, 132, 1)'
-      ],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
+//FUNCTIONALITY
+const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+const menuBar = document.querySelector('#content nav .bx.bx-menu');
+const sidebar = document.getElementById('sidebar');
+const searchButton = document.querySelector('#content nav form .form-input button');
+const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
+const searchForm = document.querySelector('#content nav form');
+const switchMode = document.getElementById('switch-mode');
+
+allSideMenu.forEach(item => {
+  const li = item.parentElement;
+
+  item.addEventListener('click', () => {
+    allSideMenu.forEach(i => i.parentElement.classList.remove('active'));
+    li.classList.add('active');
+  });
+});
+
+menuBar.addEventListener('click', () => sidebar.classList.toggle('hide'));
+
+searchButton.addEventListener('click', (e) => {
+  if (window.innerWidth < 576) {
+    e.preventDefault();
+    searchForm.classList.toggle('show');
+
+    if (searchForm.classList.contains('show')) {
+      searchButtonIcon.classList.replace('bx-search', 'bx-x');
+    } else {
+      searchButtonIcon.classList.replace('bx-x', 'bx-search');
     }
+  }
+});
+
+if (window.innerWidth < 768) {
+  sidebar.classList.add('hide');
+} else if (window.innerWidth > 576) {
+  searchButtonIcon.classList.replace('bx-x', 'bx-search');
+  searchForm.classList.remove('show');
+}
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 576) {
+    searchButtonIcon.classList.replace('bx-x', 'bx-search');
+    searchForm.classList.remove('show');
+  }
+});
+
+switchMode.addEventListener('change', () => {
+  if (switchMode.checked) {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
   }
 });
